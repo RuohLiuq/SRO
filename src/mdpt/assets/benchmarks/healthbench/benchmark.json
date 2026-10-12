@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "healthbench",
+  "display_name": "HealthBench",
+  "primary_score": "healthbench_primary",
+  "capability": "safe, complete, uncertainty-aware responses to health conversations",
+  "input_contract": "a multi-turn health conversation",
+  "output_contract": "a complete and safe assistant response",
+  "scorer": "rubric-based judge aggregation performed only by the evaluation system",
+  "augmentation": ["rewrite", "correction"],
+  "search_eval_args": ["--limit", "122"],
+  "final_eval_args": ["--limit", "-1"],
+  "requires_judge": true
+}

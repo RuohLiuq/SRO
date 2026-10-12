@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mdpt"
+version = "0.1.0"
+description = "Multi-domain automated post-training"
+requires-python = ">=3.10"
+dependencies = [
+  "pydantic>=2.7,<3",
+  "python-dotenv>=1.0,<2",
+  "datasets>=4.5,<5",
+  "openai>=2.0,<3",
+  "inspect-evals>=0.5,<0.6",
+]
+
+[project.optional-dependencies]
+search = [
+  "numpy>=2.0,<3",
+  "torch>=2.4",
+  "accelerate>=1.0",
+  "transformers>=4.51",
+  "peft>=0.15",
+  "trl>=0.17",
+  "vllm>=0.8",
+  "tqdm>=4.66",
+]
+
+[project.scripts]
+mdpt = "mdpt.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mdpt = ["assets/**/*"]

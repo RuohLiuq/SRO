@@ -1,0 +1,18 @@
+{
+  "benchmark_id": "gsm8k",
+  "display_name": "GSM8K",
+  "primary_score": "gsm8k_primary",
+  "capability": "multi-step grade-school mathematical word-problem reasoning",
+  "input_contract": "a natural-language mathematical word problem",
+  "output_contract": "reasoning followed by a final numeric answer",
+  "scorer": "exact match on the normalized final number",
+  "augmentation": ["rewrite", "correction"],
+  "search_eval_args": ["--limit", "659", "--max-tokens", "1024"],
+  "final_eval_args": ["--limit", "-1", "--max-tokens", "1024"],
+  "contamination_probe": {
+    "dataset": "openai/gsm8k",
+    "subset": "main",
+    "split": "test",
+    "field": "question"
+  }
+}

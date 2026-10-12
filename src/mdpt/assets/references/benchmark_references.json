@@ -1,0 +1,60 @@
+{
+  "version": "v1.1",
+  "source": "https://posttrainbench.com/scores.js",
+  "scores_are_fractions": true,
+  "benchmark_weights": {
+    "aime2025": 0.22653655,
+    "arenahardwriting": 0.09035183,
+    "bfcl": 0.07460785,
+    "gpqamain": 0.22462216,
+    "gsm8k": 0.09358823,
+    "healthbench": 0.18414483,
+    "humaneval": 0.10614855
+  },
+  "models": {
+    "Qwen/Qwen3-1.7B-Base": {
+      "official_instruct_model": "Qwen/Qwen3-1.7B",
+      "base_scores": {
+        "aime2025": 0.0,
+        "bfcl": 0.0,
+        "gpqamain": 0.140625,
+        "gsm8k": 0.12661106899166036,
+        "healthbench": 0.07537565969807473,
+        "humaneval": 0.07926829268292683
+      },
+      "scores": {
+        "aime2025": 0.26666666666666666,
+        "arenahardwriting": 0.5000,
+        "bfcl": 0.94,
+        "gpqamain": 0.3549107142857143,
+        "gsm8k": 0.8847611827141774,
+        "healthbench": 0.44918867035528026,
+        "humaneval": 0.6890243902439024
+      }
+    },
+    "Qwen/Qwen3-4B-Base": {
+      "official_instruct_model": "Qwen/Qwen3-4B",
+      "base_scores": {
+        "aime2025": 0.03333333333333333,
+        "bfcl": 0.0,
+        "gpqamain": 0.13392857142857142,
+        "gsm8k": 0.4184988627748294,
+        "healthbench": 0.13383521639663787,
+        "humaneval": 0.36585365853658536
+      },
+      "scores": {
+        "aime2025": 0.5333333333333333,
+        "arenahardwriting": 0.8684,
+        "bfcl": 0.95,
+        "gpqamain": 0.44642857142857145,
+        "gsm8k": 0.9378316906747536,
+        "healthbench": 0.5272399437524256,
+        "humaneval": 0.774390243902439
+      }
+    }
+  },
+  "aliases": {
+    "Qwen3-1.7B-Base": "Qwen/Qwen3-1.7B-Base",
+    "Qwen3-4B-Base": "Qwen/Qwen3-4B-Base"
+  }
+}

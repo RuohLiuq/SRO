@@ -1,0 +1,12 @@
+{
+  "benchmark_id": "gpqamain",
+  "display_name": "GPQA Main",
+  "primary_score": "gpqa_primary",
+  "capability": "graduate-level scientific reasoning over four plausible choices",
+  "input_contract": "a scientific multiple-choice question with four choices",
+  "output_contract": "reasoning followed by one A-D answer label",
+  "scorer": "exact match on the normalized answer label",
+  "augmentation": ["rewrite", "correction"],
+  "search_eval_args": ["--limit", "224", "--max-tokens", "2048"],
+  "final_eval_args": ["--limit", "-1", "--max-tokens", "2048"]
+}

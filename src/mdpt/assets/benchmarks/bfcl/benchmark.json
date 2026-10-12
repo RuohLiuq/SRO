@@ -1,0 +1,12 @@
+{
+  "benchmark_id": "bfcl",
+  "display_name": "Berkeley Function Calling Leaderboard (BFCL)",
+  "primary_score": "bfcl_primary",
+  "capability": "tool selection and schema-valid function calling",
+  "input_contract": "conversation messages plus typed tool definitions",
+  "output_contract": "structured tool calls with valid function names and arguments",
+  "scorer": "function-call structure and argument correctness",
+  "augmentation": ["rewrite", "correction"],
+  "search_eval_args": ["--limit", "50"],
+  "final_eval_args": ["--limit", "-1"]
+}

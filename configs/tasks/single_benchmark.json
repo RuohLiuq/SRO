@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "base_model": "Qwen/Qwen3-1.7B-Base",
+  "domains": [
+    {
+      "domain_id": "math",
+      "benchmarks": [
+        {"benchmark_id": "gsm8k"}
+      ]
+    }
+  ],
+  "budget": {
+    "discovery_hours": 2,
+    "max_train_samples_per_trial": 5000
+  }
+}

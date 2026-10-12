@@ -1,0 +1,12 @@
+{
+  "benchmark_id": "aime2025",
+  "display_name": "AIME 2025",
+  "primary_score": "aime2025_primary",
+  "capability": "competition-level mathematical reasoning with an integer answer in 0..999",
+  "input_contract": "a mathematical problem statement",
+  "output_contract": "reasoning followed by a final integer answer",
+  "scorer": "exact match on the normalized final integer",
+  "augmentation": ["rewrite", "correction"],
+  "search_eval_args": ["--limit", "15"],
+  "final_eval_args": ["--limit", "-1"]
+}

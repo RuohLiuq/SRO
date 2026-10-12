@@ -1,0 +1,12 @@
+{
+  "benchmark_id": "humaneval",
+  "display_name": "HumanEval",
+  "primary_score": "humaneval_primary",
+  "capability": "Python function synthesis from a callable specification",
+  "input_contract": "a Python function signature and natural-language specification",
+  "output_contract": "executable Python implementation",
+  "scorer": "pass rate against executable tests",
+  "augmentation": ["rewrite", "correction"],
+  "search_eval_args": ["--limit", "82", "--max-tokens", "1024"],
+  "final_eval_args": ["--limit", "-1", "--max-tokens", "1024"]
+}
