@@ -1,17 +1,8 @@
-"""surrogate.py — 纯 Python 多输出随机森林（零依赖），给 BO acquisition 当代理模型。
+"""Pure-Python multi-output random forests for Bayesian optimization.
 
-为什么自带 RF 而不用 sklearn：
-  整个 mdpt 是 stdlib + pydantic、可离线跑。RF 在我们这种"小样本 + 类别为主 + 结构化"
-  的 recipe 空间里比 GP 稳，且我们需要"逐树预测"来做 Monte-Carlo 不确定性，自己实现
-  反而更可控。
-
-结构：
-  _RegressionTree   单棵回归树（按方差/SSE 贪心分裂，特征子采样）。
-  RandomForest      bootstrap + 特征子采样的树集成；暴露 tree_predictions() 供 MC。
-  MultiOutputSurrogate  每个输出维度（各 target domain 的 gain）一个 RF；
-                        sample() 通过"逐树预测里随机抽"产生 MC 联合样本。
-
-不确定性来源：森林内各树预测的分歧（disagreement）。样本极少时分歧大 → σ 大 → 探索。
+This module uses only the standard library. Each output has its own forest,
+and Monte Carlo samples are drawn from individual tree predictions to represent
+uncertainty through disagreement between trees.
 """
 from __future__ import annotations
 
@@ -43,11 +34,11 @@ class _Node:
         self.thr: float = 0.0
         self.left: Optional["_Node"] = None
         self.right: Optional["_Node"] = None
-        self.value: Optional[float] = None  # 叶子才有值
+        self.value: Optional[float] = None  # Set only for leaf nodes.
 
 
 class _RegressionTree:
-    """CART 风格回归树：在随机特征子集上找最小 SSE 的二分切分。"""
+    """CART-style regression tree with feature subsampling and minimum-SSE splits."""
 
     def __init__(self, max_depth: int = 4, min_samples: int = 2,
                  feat_frac: float = 0.7, rng: Optional[random.Random] = None) -> None:
@@ -107,7 +98,7 @@ class _RegressionTree:
 
 
 class RandomForest:
-    """bootstrap + 特征子采样的回归森林。"""
+    """Regression forest with bootstrap sampling and feature subsampling."""
 
     def __init__(self, n_estimators: int = 24, max_depth: int = 4,
                  feat_frac: float = 0.7, seed: int = 0) -> None:
@@ -124,7 +115,7 @@ class RandomForest:
             return self
         rng = random.Random(self.seed)
         for t in range(self.n_estimators):
-            # bootstrap：有放回采样
+            # Bootstrap sampling with replacement.
             boot = [rng.randrange(n) for _ in range(n)]
             Xb = [X[i] for i in boot]
             yb = [y[i] for i in boot]
@@ -137,7 +128,7 @@ class RandomForest:
         return self
 
     def tree_predictions(self, x: list[float]) -> list[float]:
-        """每棵树各给一个预测（MC 的样本来源）。"""
+        """Return per-tree predictions for Monte Carlo sampling."""
         return [tree.predict(x) for tree in self.trees]
 
     def predict(self, x: list[float]) -> float:
@@ -146,7 +137,7 @@ class RandomForest:
 
 
 class MultiOutputSurrogate:
-    """每个输出 key 一个 RF；sample() 产生跨输出的 Monte-Carlo 联合样本。"""
+    """Fit one forest per output and draw joint Monte Carlo samples."""
 
     def __init__(self, keys: list[str], n_estimators: int = 24,
                  max_depth: int = 4, feat_frac: float = 0.7, seed: int = 0) -> None:
@@ -177,7 +168,7 @@ class MultiOutputSurrogate:
 
     def sample(self, x: list[float], n_samples: int = 64,
                rng: Optional[random.Random] = None) -> list[dict[str, float]]:
-        """对每个 key 缓存逐树预测，再随机抽 → n_samples 个联合 y 向量。"""
+        """Cache per-tree predictions and draw n_samples joint output vectors."""
         rng = rng or random.Random(0)
         tree_preds = {k: rf.tree_predictions(x) for k, rf in self.forests.items()}
         out: list[dict[str, float]] = []
