@@ -19,7 +19,7 @@ The implementation follows a complete `Discovery → Search → Evaluate` workfl
 
 ## Paper
 
-The arXiv paper will be available soon.
+[LLM Agents for Automated Post-Training via Structured Recipe Optimization](https://arxiv.org/abs/2610.18572) | [PDF](https://arxiv.org/pdf/2610.18572)
 
 ## Installation
 
@@ -92,4 +92,16 @@ SRO uses benchmark formats and evaluation components derived from or aligned wit
 
 ## Citation
 
-Citation information will be added with the arXiv release.
+If you find SRO useful in your research, please cite our paper:
+
+```bibtex
+@misc{liu2026llmagentsautomatedposttraining,
+  title={LLM Agents for Automated Post-Training via Structured Recipe Optimization},
+  author={Ruohong Liu and Bohan Tang and Lekang Jiang and Jack Umenberger and Yiwen Guo},
+  year={2026},
+  eprint={2610.18572},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2610.18572},
+}
+```
