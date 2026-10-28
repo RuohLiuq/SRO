@@ -19,7 +19,7 @@ The implementation follows a complete `Discovery → Search → Evaluate` workfl
 
 ## Paper
 
-[LLM Agents for Automated Post-Training via Structured Recipe Optimization](https://arxiv.org/abs/2610.18572) | [PDF](https://arxiv.org/pdf/2610.18572)
+[LLM Agents for Automated Post-Training via Structured Recipe Optimization](https://arxiv.org/abs/2610.18572) · arXiv:2610.18572 | [PDF](https://arxiv.org/pdf/2610.18572)
 
 ## Installation
 
